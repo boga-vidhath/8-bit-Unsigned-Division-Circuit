@@ -22,9 +22,9 @@ module div #(parameter WIDTH=8) (
     always_comb begin
         if (ac >= {1'b0,y1}) begin
             ac_next = ac - y1;
-            {ac_next, q1_next} = {ac_next[WIDTH-1:0], q1, 1'b1};
+            {ac_next, q1_next} = {ac_next[WIDTH-1:0], q1, 1'b1}; //If Difference positive, add 1 to the LSB of quotient
         end else begin
-            {ac_next, q1_next} = {ac, q1} << 1;
+            {ac_next, q1_next} = {ac, q1} << 1; //If Difference is negative, restore the 'ac' value and shift for next stage of operation and set the LSB of quotient to 0 also by shift
         end
     end
 //Time bound clock based operations: Sequential
